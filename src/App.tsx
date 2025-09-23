@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import SuccessButton from './components/SuccessButton/SuccessButton'
 import ErrorButton from './components/ErrorButton/ErrorButton'

@@ -1,5 +1,7 @@
 
 import { useNotification } from '../../contexts/NotificationContext';
+import { IoMdCloseCircleOutline } from "react-icons/io";
+import './Notification.scss'
 
 function Notification() {
     const { notification, clearNotification } = useNotification();
@@ -7,11 +9,13 @@ function Notification() {
     if (!notification) return null;
 
     return (
-        <div>
+        <div className='notification' style={{
+            backgroundColor: notification.color,
+        }}>
             {notification.message}
-            <button onClick={clearNotification}>
-                ✖
-            </button>
+            
+            <IoMdCloseCircleOutline onClick={clearNotification} className='btn'/>
+            
         </div>
     )
 }
