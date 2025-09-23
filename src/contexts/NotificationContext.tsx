@@ -1,25 +1,55 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
-import type { Notification} from "../types/Notification"
+import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import type { Notification, NotificationType} from "../types/Notification"
 
 
 type NotificationContextType = {
     notification: Notification;
     setNotification: (notification: Notification) => void;
+    showNotification: (message: string, type: NotificationType) => void;
+    clearNotification: () => void;
 }
 
 const defaultValue: Notification = {
-  message: "",
-  type: "info",
-  color: ""
+    message: "",
+    type: "info",
+    color: ""
 };
 
-export const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
+const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 export const NotificationProvider = ({children}: {children: ReactNode}) => {
     const [notification, setNotification] = useState<Notification>(defaultValue);
 
+    const showNotification = (message: string, type: NotificationType) => {
+        const colorMap: Record<NotificationType, string> = {
+            success: "green",
+            error: "red",
+            info: "blue"
+        };
+
+        setNotification({
+            message,
+            type,
+            color: colorMap[type]
+        });
+    };
+
+    const clearNotification = () => {
+        setNotification(defaultValue);
+    };
+
+    useEffect(() => {
+        if (notification) {
+            const timer = setTimeout(() => {
+                clearNotification();
+            }, 3000);
+            return () => clearTimeout(timer);
+        }
+    }, [notification]);
+
+
     return (
-        <NotificationContext.Provider value={{notification, setNotification}}>
+        <NotificationContext.Provider value={{notification, setNotification, showNotification, clearNotification}}>
             {children}
         </NotificationContext.Provider>
     )
