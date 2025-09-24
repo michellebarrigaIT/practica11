@@ -1,6 +1,7 @@
 import ErrorButton from './components/ErrorButton/ErrorButton'
 import Notification from './components/Notification/Notification'
 import Navbar from './components/Navbar/Navbar'
+import './App.scss'
 
 function App() {
 

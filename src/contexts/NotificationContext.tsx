@@ -22,9 +22,9 @@ export const NotificationProvider = ({children}: {children: ReactNode}) => {
 
     const showNotification = (message: string, type: NotificationType) => {
         const colorMap: Record<NotificationType, string> = {
-            success: "green",
+            success: "#456F13",
             error: "red",
-            info: "blue"
+            info: "#2E55BB"
         };
 
         setNotification({
