@@ -9,7 +9,7 @@ function App() {
     <div>
       <Notification />
       <Navbar />
-      <h1>Notification System Demo</h1>
+      <h1>Notification System with React Context</h1>
       <ErrorButton />
     </div>
   )

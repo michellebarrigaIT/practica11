@@ -3,22 +3,16 @@ import type { Notification, NotificationType} from "../types/Notification"
 
 
 type NotificationContextType = {
-    notification: Notification;
+    notification: Notification  | null;
     setNotification: (notification: Notification) => void;
     showNotification: (message: string, type: NotificationType) => void;
     clearNotification: () => void;
 }
 
-const defaultValue: Notification = {
-    message: "",
-    type: "info",
-    color: ""
-};
-
 const NotificationContext = createContext<NotificationContextType | undefined>(undefined);
 
 export const NotificationProvider = ({children}: {children: ReactNode}) => {
-    const [notification, setNotification] = useState<Notification>(defaultValue);
+    const [notification, setNotification] = useState<Notification | null>(null);
 
     const showNotification = (message: string, type: NotificationType) => {
         const colorMap: Record<NotificationType, string> = {
@@ -35,7 +29,7 @@ export const NotificationProvider = ({children}: {children: ReactNode}) => {
     };
 
     const clearNotification = () => {
-        setNotification(defaultValue);
+        setNotification(null);
     };
 
     useEffect(() => {
