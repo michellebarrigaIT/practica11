@@ -1,4 +1,5 @@
 import { useNotification } from "../../contexts/NotificationContext";
+import "./SuccessButton.scss";
 
 const SuccessButton = () => {
     const { showNotification } = useNotification();
